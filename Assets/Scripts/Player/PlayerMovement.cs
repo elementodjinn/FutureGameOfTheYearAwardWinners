@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator animator;
     private SpriteRenderer SR;
+    private PhotonView PV;
 
     #endregion
 
@@ -29,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
+        if (!PV.IsMine) return;     //disables it if the owner is not the current viewer.
         moveHorizontal = 0f;
         moveVertical = 0f;
         if (Input.GetKey("a"))
@@ -70,6 +73,8 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (!PV.IsMine) return;     //disables it if the owner is not the current viewer.
+
         //setting velocity because I don't know how to make smooth acceleration with a maximum velocity. 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
         playerRigidbody.velocity = movement * speed;
