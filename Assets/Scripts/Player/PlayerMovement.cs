@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         SR = GetComponent<SpriteRenderer>();
-
+        PV = GetComponent<PhotonView>();
     }
     private void Update()
     {
