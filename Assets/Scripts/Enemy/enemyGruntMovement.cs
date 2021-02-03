@@ -8,6 +8,8 @@ public class enemyGruntMovement : MonoBehaviour
 
     private Rigidbody2D myRigidbody;
 
+
+
     private bool moving; // is the enemy moving or not
 
     public float timeBetweenMove; //how long it takes between each movement
@@ -24,6 +26,7 @@ public class enemyGruntMovement : MonoBehaviour
 
         timeBetweenMoveCounter = timeBetweenMove;
         timeToMoveCounter = timeToMove;
+
     }
 
     // Update is called once per frame
@@ -34,7 +37,7 @@ public class enemyGruntMovement : MonoBehaviour
             timeToMoveCounter -= Time.deltaTime;
             myRigidbody.velocity = moveDirection; // how fast emeny is moving
 
-            if(timeBetweenMoveCounter < 0f)
+            if (timeBetweenMoveCounter < 0f)
             {
                 moving = false;
                 timeBetweenMoveCounter = timeBetweenMove;
@@ -44,7 +47,7 @@ public class enemyGruntMovement : MonoBehaviour
         {
             timeBetweenMoveCounter -= Time.deltaTime; //time it takes one update of the screen
             myRigidbody.velocity = Vector2.zero;//stop moving
-            if(timeBetweenMoveCounter < 0f)
+            if (timeBetweenMoveCounter < 0f)
             {
                 moving = true;
                 timeToMoveCounter = timeToMove; //reset counter
@@ -52,5 +55,9 @@ public class enemyGruntMovement : MonoBehaviour
                 moveDirection = new Vector3(Random.Range(-1f, 1f) * moveSpeed, Random.Range(-1f, 1f) * moveSpeed, 0f); //pick random num between 1 & -1 on X & Y axis --> chooses enemy direction. Might want to change later to go towards player if within certain range. 
             }
         }
+
+        
+
     }
 }
+
