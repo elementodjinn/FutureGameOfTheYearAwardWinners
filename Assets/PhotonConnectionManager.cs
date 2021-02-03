@@ -14,6 +14,7 @@ public class PhotonConnectionManager : MonoBehaviourPunCallbacks, IInRoomCallbac
     // Start is called before the first frame update
     void Start()
     {
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     // Update is called once per frame

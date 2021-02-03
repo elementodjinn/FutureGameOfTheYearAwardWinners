@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IPunObservable
 {
     // Written by Kyle Kreml
     #region Variables
@@ -31,32 +31,33 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        if (!PV.IsMine) return;     //disables it if the owner is not the current viewer.
-        moveHorizontal = 0f;
-        moveVertical = 0f;
-        if (Input.GetKey("a"))
+        if (PV.IsMine)     //disables it if the owner is not the current viewer.
         {
-            moveHorizontal = -1f;
+            moveHorizontal = 0f;
+            moveVertical = 0f;
+            if (Input.GetKey("a"))
+            {
+                moveHorizontal = -1f;
+            }
+            if (Input.GetKey("d"))
+            {
+                moveHorizontal = 1f;
+            }
+            if (Input.GetKey("s"))
+            {
+                moveVertical = -1f;
+            }
+            if (Input.GetKey("w"))
+            {
+                moveVertical = 1f;
+            }
+            //Here I am simply attempting to make the player not move 'faster' if they move diagonally. Haven't tried anything else yet.
+            if (Mathf.Abs(moveHorizontal) == Mathf.Abs(moveVertical) && moveHorizontal != 0)
+            {
+                moveHorizontal *= .7f;
+                moveVertical *= .7f;
+            }
         }
-        if (Input.GetKey("d"))
-        {
-            moveHorizontal = 1f;
-        }
-        if (Input.GetKey("s"))
-        {
-            moveVertical = -1f;
-        }
-        if (Input.GetKey("w"))
-        {
-            moveVertical = 1f;
-        }
-        //Here I am simply attempting to make the player not move 'faster' if they move diagonally. Haven't tried anything else yet.
-        if (Mathf.Abs(moveHorizontal) == Mathf.Abs(moveVertical) && moveHorizontal != 0)
-        {
-            moveHorizontal *= .7f;
-            moveVertical *= .7f;
-        }
-
 
         //Animation part
         animator.SetFloat("VerticalSpeed", moveVertical);
@@ -78,5 +79,19 @@ public class PlayerMovement : MonoBehaviour
         //setting velocity because I don't know how to make smooth acceleration with a maximum velocity. 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
         playerRigidbody.velocity = movement * speed;
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if(stream.IsWriting)
+        {
+            stream.SendNext(moveHorizontal);
+            stream.SendNext(moveVertical);
+        }
+        else
+        {
+            moveHorizontal = (float)stream.ReceiveNext();
+            moveVertical = (float)stream.ReceiveNext();
+        }
     }
 }
