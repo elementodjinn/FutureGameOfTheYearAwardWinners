@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 509550075}
   - component: {fileID: 509550074}
   - component: {fileID: 5481686175766816204}
-  - component: {fileID: 1577696526}
+  - component: {fileID: 4632940366798923767}
   m_Layer: 0
   m_Name: Tongue Tip
   m_TagString: Untagged
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TongueLength: 2
-  speedThreshold: 1
+  speedThreshold: 0.8
 --- !u!212 &509550071
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -303,8 +303,8 @@ MonoBehaviour:
   m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!61 &1577696526
-BoxCollider2D:
+--- !u!58 &4632940366798923767
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -317,18 +317,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
-    newSize: {x: 0.71875, y: 0.875}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.15, y: 0.15}
-  m_EdgeRadius: 0
+  m_Radius: 0.15
 --- !u!1 &1713081514
 GameObject:
   m_ObjectHideFlags: 0

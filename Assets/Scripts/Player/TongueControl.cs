@@ -21,7 +21,7 @@ public class TongueControl : MonoBehaviour
     void Start()
     {
         PV = GetComponent<PhotonView>();
-        tongueCollider = GetComponent<BoxCollider2D>();
+        tongueCollider = GetComponent<CircleCollider2D>();
         cam = Camera.main;
         mouthLocation = transform.parent;
         
@@ -46,7 +46,7 @@ public class TongueControl : MonoBehaviour
     {
         if(other.tag == "Enemy")
         {
-            other.GetComponent<EnemyHealth>().takeDamage((int)movedDistance, transform.position);
+            other.GetComponent<EnemyHealth>().takeDamage((int)movedDistance + 1, transform.position);
         }
     }
 }
