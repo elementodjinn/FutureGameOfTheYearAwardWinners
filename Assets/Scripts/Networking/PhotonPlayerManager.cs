@@ -31,6 +31,7 @@ public class PhotonPlayerManager : MonoBehaviour
     void Start()
     {
         playerInstance = PhotonNetwork.Instantiate(playerPrefab.name, Vector2.zero, Quaternion.identity,0);
+
         //playerInstance.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = PhotonNetwork.NickName;
     }
 
