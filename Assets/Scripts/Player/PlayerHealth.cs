@@ -28,9 +28,9 @@ public class PlayerHealth : MonoBehaviour
         {
             transform.GetChild(0).GetChild(0).GetComponent<Text>().text = PhotonNetwork.NickName;
         }
-        else
+        else if(PhotonNetwork.PlayerListOthers.Length != 0)
         {
-
+            
             transform.GetChild(0).GetChild(0).GetComponent<Text>().text = PhotonNetwork.PlayerListOthers[0].NickName;
         }
     }
