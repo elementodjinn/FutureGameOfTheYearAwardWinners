@@ -49,15 +49,12 @@ public class Enemy : NPC
         if (target != null)
         {
             direction = (target.transform.position - transform.position).normalized;
-           // transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-            RB.AddForce(Vector2.MoveTowards(transform.position, moveSpots[randomSpot].position, speed * Time.deltaTime));
+            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
         else
         {
             direction = (moveSpots[randomSpot].position - transform.position).normalized;
-            //transform.position = Vector2.MoveTowards(transform.position, moveSpots[randomSpot].position, speed * Time.deltaTime);
-            //RB.MovePosition(Vector2.MoveTowards(transform.position, moveSpots[randomSpot].position, speed * Time.deltaTime));
-            RB.AddForce(Vector2.MoveTowards(transform.position, moveSpots[randomSpot].position, speed * Time.deltaTime));
+            transform.position = Vector2.MoveTowards(transform.position, moveSpots[randomSpot].position, speed * Time.deltaTime);
 
             if (Vector2.Distance(transform.position, moveSpots[randomSpot].position) < 0.2f)
             {

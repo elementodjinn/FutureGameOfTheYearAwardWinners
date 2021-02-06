@@ -31,7 +31,7 @@ public class EnemyHealth : MonoBehaviour
     }
     void knockBack(float amount, Vector3 impactSource)
     {
-        RB.AddForce((transform.position - impactSource).normalized * amount*3, ForceMode2D.Impulse);
+        RB.AddForce((transform.position - impactSource).normalized * amount*5, ForceMode2D.Impulse);
     }
     // Update is called once per frame
     void Update()

@@ -15,6 +15,7 @@ public class TongueControl : MonoBehaviour
     private Collider2D tongueCollider;
     public float TongueLength;
     public float speedThreshold;
+    public bool NOMOUSE_OPTION = false;
 
     #endregion
     // Start is called before the first frame update
@@ -31,7 +32,7 @@ public class TongueControl : MonoBehaviour
     void Update()
     {
         if (!PV.IsMine) return; // do not run following script if it is not current viewer's character.
-
+        if (NOMOUSE_OPTION) return; //return if no mouse is turned on;
 
         lastLocation = transform.position;
         Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition)- mouthLocation.position;
