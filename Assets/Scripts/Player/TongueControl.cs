@@ -22,7 +22,7 @@ public class TongueControl : MonoBehaviour
     {
         PV = GetComponent<PhotonView>();
         tongueCollider = GetComponent<CircleCollider2D>();
-        cam = Camera.main;
+        cam = transform.parent.GetChild(7).GetComponent<Camera>();      /// This is very poor pracice! will clean this up latyer
         mouthLocation = transform.parent;
         
     }
@@ -31,6 +31,7 @@ public class TongueControl : MonoBehaviour
     void Update()
     {
         if (!PV.IsMine) return; // do not run following script if it is not current viewer's character.
+
 
         lastLocation = transform.position;
         Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition)- mouthLocation.position;
