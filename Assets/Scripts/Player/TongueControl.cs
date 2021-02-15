@@ -6,21 +6,36 @@ using UnityEngine;
 public class TongueControl : MonoBehaviour
 {
     #region variables
-    private Camera cam;
     private PhotonView PV;
-    private Transform mouthLocation;
+
+    //########## Tongue 
+    //movement 
+    private Rigidbody2D RB;
+    private Camera cam;
+    public float TongueLength;
+    public float speedThreshold;
+    private Transform mouthLocation; //transform of the mouth where tongue extends out from
+
+    //attack
     private Vector2 lastLocation;
     private float movedDistance;
     private bool canAttack;
     private Collider2D tongueCollider;
-    public float TongueLength;
-    public float speedThreshold;
+    public GameObject splashPrefab;
+
+    //attack cooldown
+    private int attackDelay = 20;
+    private int currentAttackDelay = 0;
+
+
+    //########## Test Option
     public bool NOMOUSE_OPTION = false;
 
     #endregion
     // Start is called before the first frame update
     void Start()
     {
+        RB = GetComponent<Rigidbody2D>();
         PV = GetComponent<PhotonView>();
         tongueCollider = GetComponent<CircleCollider2D>();
         cam = transform.parent.GetChild(7).GetComponent<Camera>();      /// This is very poor pracice! will clean this up latyer
@@ -29,26 +44,66 @@ public class TongueControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (!PV.IsMine) return; // do not run following script if it is not current viewer's character.
         if (NOMOUSE_OPTION) return; //return if no mouse is turned on;
 
-        lastLocation = transform.position;
-        Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition)- mouthLocation.position;
-        transform.position = (Vector2)mouthLocation.position + Vector2.ClampMagnitude(mousePos, TongueLength);
-        movedDistance = ((Vector2)transform.position - lastLocation).magnitude;
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Debug.Log(currentAttackDelay);
+            if(currentAttackDelay <= 0)
+            {
+                Debug.Log("tongue Shot");
+                Vector2 mousePos = (cam.ScreenToWorldPoint(Input.mousePosition) - mouthLocation.position);
+                RB.AddForce(mousePos*TongueLength);
+                currentAttackDelay = attackDelay;
+            }
+        }
 
-        tongueCollider.enabled = movedDistance >= speedThreshold; //activate only when the speed of the tongue exceeds a threshold
-    
-        
+        if (currentAttackDelay > 0) currentAttackDelay--;
+
+
+        /*
+        if (currentAttackDelay-- <= 0)
+        {
+            lastLocation = transform.position;
+            Vector2 mousePos = Vector2.ClampMagnitude(cam.ScreenToWorldPoint(Input.mousePosition) - mouthLocation.position,TongueLength);
+            RB.MovePosition(Vector2.MoveTowards(transform.position, cam.ScreenToWorldPoint(Input.mousePosition), 1f));
+           // Vector2.MoveTowards(transform.position, mousePos, 0.2f);
+            //RB.AddForce()
+
+            //transform.position = (Vector2)mouthLocation.position + Vector2.ClampMagnitude(mousePos, TongueLength);
+            movedDistance = ((Vector2)transform.position - lastLocation).magnitude;
+
+            tongueCollider.enabled = movedDistance >= speedThreshold; //activate only when the speed of the tongue exceeds a threshold
+        }*/
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            if (RB.velocity.magnitude < speedThreshold) return;
+            Debug.Log(RB.velocity.magnitude);
+            collision.gameObject.GetComponent<EnemyHealth>().takeDamage((int)movedDistance + 1, transform.position);
+            GameObject splashInst = Instantiate(splashPrefab, collision.transform.position, Quaternion.Euler(Vector3.RotateTowards(collision.transform.position, transform.position, 10f, 99f)));
+            Destroy(splashInst, 1);
+            bounce(collision.transform.position, movedDistance + 1);
+
+        }
+
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+
+    private void bounce(Vector3 bounceFrom, float amount)
     {
-        if(other.tag == "Enemy")
-        {
-            other.GetComponent<EnemyHealth>().takeDamage((int)movedDistance + 1, transform.position);
-        }
+        currentAttackDelay = attackDelay;
+        RB.AddForce((transform.position - bounceFrom).normalized*amount);
+        
+
+    }
+    public void SetDelay(int newDelay)
+    {
+        attackDelay = newDelay;
     }
 }

@@ -46,7 +46,7 @@ public abstract class Character : MonoBehaviour // can't exist w/o enemy
 
     public void Move()
     {
-        myRigidbody.velocity = direction.normalized * speed; // how fast emeny is moving, framerate independent
+        myRigidbody.AddForce(direction.normalized * speed); // how fast emeny is moving, framerate independent
         
     }
 
