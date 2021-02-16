@@ -7,11 +7,12 @@ public class TongueControl : MonoBehaviour
 {
     #region variables
     private PhotonView PV;
+    private TongueFX FX;
 
     //########## Tongue 
     //movement 
     private Rigidbody2D RB;
-    private Camera cam;
+    public Camera cam;
     public float TongueLength;
     public float speedThreshold;
     private Transform mouthLocation; //transform of the mouth where tongue extends out from
@@ -37,29 +38,33 @@ public class TongueControl : MonoBehaviour
     {
         RB = GetComponent<Rigidbody2D>();
         PV = GetComponent<PhotonView>();
+        FX = GetComponent<TongueFX>();
         tongueCollider = GetComponent<CircleCollider2D>();
-        cam = transform.parent.GetChild(7).GetComponent<Camera>();      /// This is very poor pracice! will clean this up latyer
         mouthLocation = transform.parent;
         
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Debug.Log(currentAttackDelay);
+            if (currentAttackDelay <= 0)
+            {
+                Debug.Log("tongue Shot");
+                Vector2 mousePos = (cam.ScreenToWorldPoint(Input.mousePosition) - mouthLocation.position);
+                RB.AddForce(mousePos * TongueLength);
+                currentAttackDelay = attackDelay;
+            }
+        }
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
         if (!PV.IsMine) return; // do not run following script if it is not current viewer's character.
         if (NOMOUSE_OPTION) return; //return if no mouse is turned on;
 
-        if(Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Debug.Log(currentAttackDelay);
-            if(currentAttackDelay <= 0)
-            {
-                Debug.Log("tongue Shot");
-                Vector2 mousePos = (cam.ScreenToWorldPoint(Input.mousePosition) - mouthLocation.position);
-                RB.AddForce(mousePos*TongueLength);
-                currentAttackDelay = attackDelay;
-            }
-        }
+   
 
         if (currentAttackDelay > 0) currentAttackDelay--;
 
@@ -86,9 +91,9 @@ public class TongueControl : MonoBehaviour
             if (RB.velocity.magnitude < speedThreshold) return;
             Debug.Log(RB.velocity.magnitude);
             collision.gameObject.GetComponent<EnemyHealth>().takeDamage((int)movedDistance + 1, transform.position);
-            GameObject splashInst = Instantiate(splashPrefab, collision.transform.position, Quaternion.Euler(Vector3.RotateTowards(collision.transform.position, transform.position, 10f, 99f)));
-            Destroy(splashInst, 1);
-            bounce(collision.transform.position, movedDistance + 1);
+            Vector3 colliisionPos = collision.transform.position;
+            FX.oneTimeEffect(TongueFX.effectTypes.ichor, collision.transform.position, Quaternion.LookRotation(transform.position - colliisionPos));
+            bounce(colliisionPos, movedDistance + 1);
 
         }
 
@@ -98,12 +103,17 @@ public class TongueControl : MonoBehaviour
     private void bounce(Vector3 bounceFrom, float amount)
     {
         currentAttackDelay = attackDelay;
-        RB.AddForce((transform.position - bounceFrom).normalized*amount);
+        RB.AddForce((transform.position - bounceFrom).normalized*amount * 2);
         
 
     }
     public void SetDelay(int newDelay)
     {
         attackDelay = newDelay;
+    }
+
+    public void givePoision()
+    {
+        
     }
 }

@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour, IPunObservable
     private Animator animator;
     private SpriteRenderer SR;
     private PhotonView PV;
+    private SpringJoint2D mouthLocation;
 
     #endregion
 
@@ -28,6 +29,7 @@ public class PlayerMovement : MonoBehaviour, IPunObservable
         animator = GetComponent<Animator>();
         SR = GetComponent<SpriteRenderer>();
         PV = GetComponent<PhotonView>();
+        mouthLocation = GetComponent<SpringJoint2D>();
     }
     private void Update()
     {
@@ -62,6 +64,7 @@ public class PlayerMovement : MonoBehaviour, IPunObservable
         //Animation part
         animator.SetFloat("VerticalSpeed", moveVertical);
         animator.SetFloat("HorizontalSpeed", moveHorizontal);
+
         if (moveHorizontal > 0)
         {
             SR.flipX = false;
@@ -71,6 +74,7 @@ public class PlayerMovement : MonoBehaviour, IPunObservable
             SR.flipX = true;
         }
 
+
     }
     void FixedUpdate()
     {
@@ -78,7 +82,30 @@ public class PlayerMovement : MonoBehaviour, IPunObservable
 
         //setting velocity because I don't know how to make smooth acceleration with a maximum velocity. 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
-        playerRigidbody.velocity = movement * speed;
+        playerRigidbody.velocity = movement * speed;       
+        if (Mathf.Abs(moveHorizontal) < 0.6 )
+        {
+            if(moveVertical > 0)
+            {
+                mouthLocation.anchor =  new Vector3(0, 0.3f, 0);
+            }
+            else
+            {
+                mouthLocation.anchor = new Vector3(0, -0.3f, 0);
+            }
+        }
+        else
+        {
+            if (SR.flipX == false)
+            {
+                mouthLocation.anchor =  new Vector3(0.5f, -0.25f, 0);
+            }
+            else
+            {
+                mouthLocation.anchor = new Vector3(-0.5f, -0.25f, 0);
+            }
+
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

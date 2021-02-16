@@ -9,7 +9,7 @@ public class EnemyHealth : MonoBehaviour
     private int currentHealth;
     public int maxhealth;
     private Rigidbody2D RB;
-    
+    public GameObject DeathPrefab;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -26,16 +26,16 @@ public class EnemyHealth : MonoBehaviour
         knockBack(dmg,dmgSource);
         if(currentHealth <= 0)
         {
-            Destroy(gameObject);
+            Death();
         }
     }
     void knockBack(float amount, Vector3 impactSource)
     {
         RB.AddForce((transform.position - impactSource).normalized * amount*5, ForceMode2D.Impulse);
     }
-    // Update is called once per frame
-    void Update()
+    private void Death()
     {
-        
+        GameObject guts = Instantiate(DeathPrefab, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }
