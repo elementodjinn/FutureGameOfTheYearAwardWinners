@@ -390,7 +390,7 @@ GameObject:
   - component: {fileID: 8180350669792033069}
   - component: {fileID: 8180350669792033067}
   - component: {fileID: 8180350669792033065}
-  - component: {fileID: 469224974}
+  - component: {fileID: 262886699}
   m_Layer: 0
   m_Name: antGrunt
   m_TagString: Untagged
@@ -506,7 +506,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &469224974
+--- !u!114 &262886699
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -515,30 +515,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8180350669792033068}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bbe25e5bf8ae254ba56a143fe842d81, type: 3}
+  m_Script: {fileID: 11500000, guid: 031cbfd6fd1a4ab4987f0a2d5b971c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.8
+  speed: 4
   hitBox: {fileID: 7521707286843289284}
   healthGroup: {fileID: 283238963}
-  moveSpots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  startWaitTime: 0
+  origin: {x: 0, y: 0, z: 0}
+  wanderRange: 1.5
+  movementRestInterval: 1.5

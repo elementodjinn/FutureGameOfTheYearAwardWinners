@@ -11,24 +11,33 @@ public class Enemy : NPC
 
     public Transform Target { get => target; set => target = value; }
 
-    public Transform[] moveSpots; // array of spots the enemy can move to
-    private int randomSpot;
+    public Vector3 origin; // Where the object was instantiated
+    public float wanderRange; // how far the enemy can wander from its origin
+    private Vector3 randomSpot;
     private float waitTime;
-    public float startWaitTime;
+    public float movementRestInterval;
     private Rigidbody2D RB;
 
 
     protected override void Start()
     {
-        waitTime = startWaitTime;
+        waitTime = movementRestInterval;
         RB = GetComponent<Rigidbody2D>();
-        randomSpot = Random.Range(0, moveSpots.Length);
+        origin = hitBox.transform.position;
+        randomSpot = origin + new Vector3(Random.Range(-wanderRange, wanderRange), Random.Range(-wanderRange, wanderRange), 0);
         base.Start();
     }
 
     protected override void Update()
     {
-        FollowTarget();
+        if (target != null)
+        {
+            AttackBehavior();
+        }
+        else
+        {
+            Wander();
+        }
         base.Update();
     }
 
@@ -44,33 +53,29 @@ public class Enemy : NPC
         base.DeSelect();
     }
 
-    private void FollowTarget()
+    protected virtual void AttackBehavior() //allows for override in different enemy behaviors
     {
-        if (target != null)
-        {
-            direction = (target.transform.position - transform.position).normalized;
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        }
-        else
-        {
-            direction = (moveSpots[randomSpot].position - transform.position).normalized;
-            transform.position = Vector2.MoveTowards(transform.position, moveSpots[randomSpot].position, speed * Time.deltaTime);
+        direction = (target.transform.position - transform.position).normalized;
+        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+    }
 
-            if (Vector2.Distance(transform.position, moveSpots[randomSpot].position) < 0.2f)
+    private void Wander()
+    {
+        direction = (randomSpot - transform.position).normalized;
+        transform.position = Vector2.MoveTowards(transform.position, randomSpot, speed * Time.deltaTime);
+
+        if (Vector2.Distance(transform.position, randomSpot) < 0.2f)
+        {
+            if (waitTime <= 0)
             {
-                if (waitTime <= 0)
-                {
-                    randomSpot = Random.Range(0, moveSpots.Length);
-                    waitTime = startWaitTime;
-                    direction = Vector2.zero; //reset movement. stop moving
-                }
-                else
-                {
-                    waitTime -= Time.deltaTime;
-                }
-
+                randomSpot = origin + new Vector3(Random.Range(-wanderRange, wanderRange), Random.Range(-wanderRange, wanderRange), 0);
+                waitTime = movementRestInterval;
+                direction = Vector2.zero; //reset movement. stop moving
             }
-
+            else
+            {
+                waitTime -= Time.deltaTime;
+            }
 
         }
     }
