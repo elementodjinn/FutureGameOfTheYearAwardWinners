@@ -51,6 +51,7 @@ public class PlayerHealth : MonoBehaviour
     private void onDeath()
     {
         isDead = true;
+        Destroy(gameObject);
         ///add more stuff here
     }
 }

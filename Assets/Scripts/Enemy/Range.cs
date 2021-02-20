@@ -19,7 +19,7 @@ public class Range : MonoBehaviour
         if (collision.tag == "Player")
         {
             parent.Target = collision.transform;
-
+            parent.TargetHealth = collision.gameObject.GetComponent<PlayerHealth>();
         }
     }
 
@@ -27,7 +27,7 @@ public class Range : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            parent.Target = null;
+            //parent.Target = null;
 
         }
     }

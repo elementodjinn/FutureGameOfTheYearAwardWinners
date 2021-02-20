@@ -10,7 +10,8 @@ public class PlayerMovement : MonoBehaviour, IPunObservable
 
     //This is just a general speed multiplier for the player, haven't tried anything else yet.
     public float speed;
-
+    public float detectionRadius = 5f;
+    
     float moveHorizontal = 0f;
     float moveVertical = 0f;
 
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour, IPunObservable
     private SpriteRenderer SR;
     private PhotonView PV;
     private SpringJoint2D mouthLocation;
+    private CircleCollider2D detectionCollider;
 
     #endregion
 
@@ -30,6 +32,7 @@ public class PlayerMovement : MonoBehaviour, IPunObservable
         SR = GetComponent<SpriteRenderer>();
         PV = GetComponent<PhotonView>();
         mouthLocation = GetComponent<SpringJoint2D>();
+        detectionCollider = GetComponent<CircleCollider2D>();
     }
     private void Update()
     {
@@ -105,6 +108,14 @@ public class PlayerMovement : MonoBehaviour, IPunObservable
                 mouthLocation.anchor = new Vector3(-0.5f, -0.25f, 0);
             }
 
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Enemy")
+        {
+            Debug.Log("Player has been detected by " + other);
         }
     }
 

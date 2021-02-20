@@ -54,7 +54,7 @@ public class EnemyHealth : MonoBehaviour
 
     float CalculateHealth()
     {
-        Debug.Log("Current health: " + currentHealth);
+        //Debug.Log("Current health: " + currentHealth);
         return currentHealth;
     }
 }
