@@ -978,86 +978,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.size
-      value: 19
+    - target: {fileID: 1059986584, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[0]
-      value: 
-      objectReference: {fileID: 248009573}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[1]
-      value: 
-      objectReference: {fileID: 1722602877}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[2]
-      value: 
-      objectReference: {fileID: 2014782192}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[3]
-      value: 
-      objectReference: {fileID: 1732487817}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[4]
-      value: 
-      objectReference: {fileID: 1004500291}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[5]
-      value: 
-      objectReference: {fileID: 104128582}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[6]
-      value: 
-      objectReference: {fileID: 1177744725}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[7]
-      value: 
-      objectReference: {fileID: 961279305}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[8]
-      value: 
-      objectReference: {fileID: 248665411}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[9]
-      value: 
-      objectReference: {fileID: 100026352}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[10]
-      value: 
-      objectReference: {fileID: 1777825300}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[11]
-      value: 
-      objectReference: {fileID: 1112866145}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[12]
-      value: 
-      objectReference: {fileID: 857327432}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[13]
-      value: 
-      objectReference: {fileID: 1812305945}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[14]
-      value: 
-      objectReference: {fileID: 1059299351}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[15]
-      value: 
-      objectReference: {fileID: 58893597}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[16]
-      value: 
-      objectReference: {fileID: 1312703428}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[17]
-      value: 
-      objectReference: {fileID: 1205342396}
-    - target: {fileID: 469224974, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
-      propertyPath: moveSpots.Array.data[18]
-      value: 
-      objectReference: {fileID: 1544925103}
+    - target: {fileID: 1059986584, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8180350669792033066, guid: 5a7330d3040747a43be69009cf13fce4,
         type: 3}
       propertyPath: m_RootOrder

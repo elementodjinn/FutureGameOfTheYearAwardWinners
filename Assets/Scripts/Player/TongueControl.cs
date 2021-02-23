@@ -89,7 +89,7 @@ public class TongueControl : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             if (RB.velocity.magnitude < speedThreshold) return;
-            Debug.Log(RB.velocity.magnitude);
+            //Debug.Log(RB.velocity.magnitude);
             collision.gameObject.GetComponent<EnemyHealth>().takeDamage((int)movedDistance + 1, transform.position);
             Vector3 colliisionPos = collision.transform.position;
             FX.oneTimeEffect(TongueFX.effectTypes.ichor, collision.transform.position, Quaternion.LookRotation(transform.position - colliisionPos));

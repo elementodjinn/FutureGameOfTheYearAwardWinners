@@ -8,13 +8,19 @@ public class Enemy : NPC
     private CanvasGroup healthGroup;
 
     private Transform target;
+    private PlayerHealth targetHealth;
 
     public Transform Target { get => target; set => target = value; }
+    public PlayerHealth TargetHealth { get => targetHealth; set => targetHealth = value; }
 
     public Vector3 origin; // Where the object was instantiated
     public float wanderRange; // how far the enemy can wander from its origin
     private Vector3 randomSpot;
     private float waitTime;
+    private float lastAttack = 0f;
+
+    public float attackCooldown = 2f;
+    public float attackRange = 1.5f;
     public float movementRestInterval;
     private Rigidbody2D RB;
 
@@ -55,8 +61,21 @@ public class Enemy : NPC
 
     protected virtual void AttackBehavior() //allows for override in different enemy behaviors
     {
-        direction = (target.transform.position - transform.position).normalized;
-        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        if (Vector2.Distance(transform.position, target.position) > attackRange && Time.time - lastAttack > attackCooldown)
+        {
+            direction = (target.transform.position - transform.position).normalized;
+            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        }
+        else if(Time.time - lastAttack > attackCooldown)
+        {
+            targetHealth.takeDamage(1); //player takes damage
+            lastAttack = Time.time;     //attack timer resets
+        } 
+        else
+        {
+            direction = (target.transform.position - transform.position).normalized;
+            transform.position = Vector2.MoveTowards(transform.position, target.position, -speed * Time.deltaTime);
+        }
     }
 
     private void Wander()
