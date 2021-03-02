@@ -28,7 +28,6 @@ public class EnemyHealth : MonoBehaviour
 
     public void takeDamage(int dmg, Vector3 dmgSource)
     {
-        Debug.Log("Take Damage function was called");
         currentHealth -= dmg;
         slider.value = CalculateHealth();
         knockBack(dmg,dmgSource);

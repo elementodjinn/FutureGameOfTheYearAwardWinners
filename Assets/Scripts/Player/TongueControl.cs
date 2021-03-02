@@ -48,10 +48,8 @@ public class TongueControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Debug.Log(currentAttackDelay);
             if (currentAttackDelay <= 0)
             {
-                Debug.Log("tongue Shot");
                 Vector2 mousePos = (cam.ScreenToWorldPoint(Input.mousePosition) - mouthLocation.position);
                 RB.AddForce(mousePos * TongueLength);
                 currentAttackDelay = attackDelay;

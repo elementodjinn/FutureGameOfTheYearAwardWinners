@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 283238961}
   - component: {fileID: 283238960}
   - component: {fileID: 283238963}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HealthCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 1028287778}
   - component: {fileID: 1028287780}
   - component: {fileID: 1028287779}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 1059986584}
   - component: {fileID: 1059986586}
   - component: {fileID: 1059986585}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +269,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1617760375}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1709592704}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2095068320}
   - component: {fileID: 2095068321}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7521707286843289284}
   - component: {fileID: 6340820525279543104}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: hitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -488,7 +488,7 @@ GameObject:
   - component: {fileID: 7313232053656716644}
   - component: {fileID: 5010906383836506721}
   - component: {fileID: 8898640959585324157}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -551,7 +551,7 @@ GameObject:
   - component: {fileID: 8180350669792033065}
   - component: {fileID: 262886699}
   - component: {fileID: 8180350668755042592}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: antGrunt
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -613,7 +613,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 2325782732153881282, guid: a6fceaf12b0bcf14d85a56425fa1e6db,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -678,11 +678,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 031cbfd6fd1a4ab4987f0a2d5b971c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 1.5
   hitBox: {fileID: 7521707286843289284}
   healthGroup: {fileID: 283238963}
   origin: {x: 0, y: 0, z: 0}
   wanderRange: 1.5
+  attackCooldown: 2
+  attackRange: 1.5
   movementRestInterval: 1.5
 --- !u!114 &8180350668755042592
 MonoBehaviour:

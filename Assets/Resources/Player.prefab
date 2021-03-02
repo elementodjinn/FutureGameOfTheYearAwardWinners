@@ -157,8 +157,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.6669998, y: 0.322, z: 0.18031314}
   m_LocalScale: {x: 4, y: 4, z: 1}
-  m_Children:
-  - {fileID: 5927938871847382694}
+  m_Children: []
   m_Father: {fileID: 5650563038329153633}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -658,7 +657,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.0740922, g: 0.08944811, b: 0.4245283, a: 1}
+  m_Color: {r: 0, g: 0.0050879773, b: 0.11320752, a: 0.49803922}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1362,79 +1361,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5
---- !u!1001 &6524126909873247007
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 509550070}
-    m_Modifications:
-    - target: {fileID: 634477740262604217, guid: 89bc83a2ef752c14985c6b1399529b3c,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 634477740262604217, guid: 89bc83a2ef752c14985c6b1399529b3c,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 634477740262604217, guid: 89bc83a2ef752c14985c6b1399529b3c,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 634477740262604217, guid: 89bc83a2ef752c14985c6b1399529b3c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 634477740262604217, guid: 89bc83a2ef752c14985c6b1399529b3c,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 634477740262604217, guid: 89bc83a2ef752c14985c6b1399529b3c,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 634477740262604217, guid: 89bc83a2ef752c14985c6b1399529b3c,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 634477740262604217, guid: 89bc83a2ef752c14985c6b1399529b3c,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 634477740262604217, guid: 89bc83a2ef752c14985c6b1399529b3c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 634477740262604217, guid: 89bc83a2ef752c14985c6b1399529b3c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 634477740262604217, guid: 89bc83a2ef752c14985c6b1399529b3c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7874036067035336545, guid: 89bc83a2ef752c14985c6b1399529b3c,
-        type: 3}
-      propertyPath: m_Name
-      value: Poison trail
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 89bc83a2ef752c14985c6b1399529b3c, type: 3}
---- !u!4 &5927938871847382694 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 634477740262604217, guid: 89bc83a2ef752c14985c6b1399529b3c,
-    type: 3}
-  m_PrefabInstance: {fileID: 6524126909873247007}
-  m_PrefabAsset: {fileID: 0}
+  m_Radius: 2

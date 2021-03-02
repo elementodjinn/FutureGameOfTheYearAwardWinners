@@ -7,7 +7,7 @@ public class TongueFX : MonoBehaviour
 {
     public enum effectTypes { poison, speed,ichor }
     public GameObject[] effectPrefabs;
-    private Dictionary<effectTypes, GameObject> effectInsts;
+    private Dictionary<effectTypes, GameObject> effectInsts = new Dictionary<effectTypes, GameObject>();
 
     // Start is called before the first frame update
     void Start()
