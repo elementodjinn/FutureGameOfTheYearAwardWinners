@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpBase : MonoBehaviour
+public abstract class PowerUpBase : MonoBehaviour
 {
     
     // Start is called before the first frame update
@@ -23,6 +23,6 @@ public class PowerUpBase : MonoBehaviour
         PowerUpEffect(collision.gameObject);
         Destroy(gameObject);
     }
-    public virtual void PowerUpEffect(GameObject player)    {    }
+    public abstract void PowerUpEffect(GameObject player);
 
 }
