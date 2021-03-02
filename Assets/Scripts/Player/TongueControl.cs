@@ -28,6 +28,12 @@ public class TongueControl : MonoBehaviour
     private int attackDelay = 20;
     private int currentAttackDelay = 0;
 
+    //PowerUps
+    public bool poison = false;
+    public int poisonInterval = 40;
+    public int poisionDMG = 1;
+
+
 
     //########## Test Option
     public bool NOMOUSE_OPTION = false;
@@ -88,7 +94,12 @@ public class TongueControl : MonoBehaviour
         {
             if (RB.velocity.magnitude < speedThreshold) return;
             //Debug.Log(RB.velocity.magnitude);
-            collision.gameObject.GetComponent<EnemyHealth>().takeDamage((int)movedDistance + 1, transform.position);
+            EnemyHealth EH = collision.gameObject.GetComponent<EnemyHealth>();
+            EH.takeDamage((int)movedDistance + 1, transform.position);
+            if(poison)
+            {
+                EH.initDOT(poisionDMG, poisonInterval);
+            }
             Vector3 colliisionPos = collision.transform.position;
             FX.oneTimeEffect(TongueFX.effectTypes.ichor, collision.transform.position, Quaternion.LookRotation(transform.position - colliisionPos));
             bounce(colliisionPos, movedDistance + 1);

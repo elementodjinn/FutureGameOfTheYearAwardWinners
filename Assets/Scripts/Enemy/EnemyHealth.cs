@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-
+    
     #region variables   
     //private int currentHealth;
     public int currentHealth;
@@ -14,6 +14,10 @@ public class EnemyHealth : MonoBehaviour
     public GameObject DeathPrefab;
     public GameObject healthBar;
     public Slider slider;
+    private bool takingDOT;
+    private int DOTamount;
+    private int DOTinterval;
+    private int DOTtimer;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -25,21 +29,49 @@ public class EnemyHealth : MonoBehaviour
 
     }
 
-
+    private void FixedUpdate()
+    {
+        if(takingDOT)
+        {
+            if(DOTtimer < 0)
+            {
+                DOTtimer--;
+            }
+            else
+            {
+                DOTtimer = DOTinterval;
+                takeDamage(DOTamount);
+            }
+        }
+    }
     public void takeDamage(int dmg, Vector3 dmgSource)
     {
         currentHealth -= dmg;
         slider.value = CalculateHealth();
-        knockBack(dmg,dmgSource);
-        if(currentHealth < maxhealth)
+        knockBack(dmg, dmgSource);
+        if (currentHealth < maxhealth)
         {
             healthBar.SetActive(true);
         }
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             Death();
         }
-        
+
+    }
+    public void takeDamage(int dmg)
+    {
+        currentHealth -= dmg;
+        slider.value = CalculateHealth();
+        if (currentHealth < maxhealth)
+        {
+            healthBar.SetActive(true);
+        }
+        if (currentHealth <= 0)
+        {
+            Death();
+        }
+
     }
     void knockBack(float amount, Vector3 impactSource)
     {
@@ -55,5 +87,13 @@ public class EnemyHealth : MonoBehaviour
     {
         //Debug.Log("Current health: " + currentHealth);
         return currentHealth;
+    }
+
+    public void initDOT(int amount, int interval)
+    {
+        takingDOT = true;
+        DOTamount = amount;
+        DOTinterval = interval;
+        GetComponent<SpriteRenderer>().color = Color.magenta;
     }
 }
