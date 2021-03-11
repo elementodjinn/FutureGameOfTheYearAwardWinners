@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public class FloorGeneration : MonoBehaviour
+public class FloorGeneration2 : MonoBehaviour
 {
     public Grid grid;
-    public GameObject[] rooms;
+    public Tilemap floor;
+    public Tilemap walls;
+    public GameObject[] roomExits;
+    public GameObject baseRoom;
     public int length = 3;
     public int height = 3;
 
@@ -18,46 +22,33 @@ public class FloorGeneration : MonoBehaviour
     void Start()
     {
         floorLayout = floorSet(length, height);
-        for(int i = 0; i < length; i++)
+        for (int i = 0; i < length; i++)
         {
-            for(int j = 0; j < height; j++)
+            for (int j = 0; j < height; j++)
             {
                 Vector2 spawnPosition = new Vector2(roomLength * i, roomHeight * j);
-                List<GameObject> viableRooms = allViableRooms(rooms, floorLayout[i, j]);
-                int room = Random.Range(0, viableRooms.Count-1);
-                Object.Instantiate(viableRooms[room], spawnPosition, Quaternion.identity, grid.transform);
+                Object.Instantiate(baseRoom, spawnPosition, Quaternion.identity, grid.transform);
+            }
+        }
+        Debug.Log(roomExits.Length);
+        for (int i = 0; i < roomExits.Length; ++i)
+        {
+            Tilemap[] wallsAndFloor = roomExits[i].GetComponentsInChildren<Tilemap>();
+            foreach(Tilemap t in wallsAndFloor)
+            {
+                int bounds = roomExits[i].GetComponent<Room>().height;
+                Debug.Log(t.name);
             }
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    //This makes a list of all the rooms you put in the room set that have the correct exits.
-    List<GameObject> allViableRooms(GameObject[] roomSet, RoomModel roomToMatch)
+    void createExits(GameObject roomToEdit, RoomModel roomToMatch)
     {
         List<GameObject> viable = new List<GameObject>();
-        foreach(GameObject roomPrefab in roomSet)
-        {
-            Room room = roomPrefab.GetComponent<Room>();
-            if(roomToMatch.northExit == room.northExit &&
-                roomToMatch.southExit == room.southExit &&
-                roomToMatch.eastExit == room.eastExit &&
-                roomToMatch.westExit == room.westExit)
-            {
-                viable.Add(roomPrefab);
-            }
-        }
-        return viable;
+        Debug.Log(roomToMatch.eastExit);
     }
-
-    //The RoomModel class. It's essentially a tuple of 4 booleans, but allowing you to change them.
     public class RoomModel
     {
-        
+
         public bool northExit { get; set; }
         public bool southExit { get; set; }
         public bool eastExit { get; set; }
@@ -71,20 +62,19 @@ public class FloorGeneration : MonoBehaviour
         }
     }
 
-    //Initializes, and returns the floor layout
     RoomModel[,] floorSet(int length, int height)
     {
         RoomModel[,] floor = new RoomModel[length, height];
         bool[,] visited = new bool[length, height];
-        for(int i = 0; i<length; i++)
+        for (int i = 0; i < length; i++)
         {
-            for(int j = 0; j<height; j++)
+            for (int j = 0; j < height; j++)
             {
                 visited[i, j] = false;
                 floor[i, j] = new RoomModel(false, false, false, false);
             }
         }
-        wallDig(ref floor,  ref visited, length, height, 0, 0);
+        wallDig(ref floor, ref visited, length, height, 0, 0);
         return floor;
     }
 
@@ -94,13 +84,13 @@ public class FloorGeneration : MonoBehaviour
         north, south, east, west
     }
 
-    //Creates the maze, using the room Models.
+
     void wallDig(ref RoomModel[,] floor, ref bool[,] visits, int length, int height, int currentXIndex, int currentYIndex)
     {
 
         visits[currentXIndex, currentYIndex] = true;
         List<directions> possibleWalls = new List<directions>();
-        while(true)
+        while (true)
         {
             possibleWalls.Clear();
             if (currentXIndex != 0 && !visits[currentXIndex - 1, currentYIndex])
