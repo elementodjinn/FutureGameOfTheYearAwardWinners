@@ -1356,7 +1356,7 @@ PrefabInstance:
     - target: {fileID: 755569230078776115, guid: 8611fa964513f7f4a8dc55f4bd0fca73,
         type: 3}
       propertyPath: m_Name
-      value: Room Base
+      value: Bottom Left Corner (Room Variant)
       objectReference: {fileID: 0}
     - target: {fileID: 755569230276312270, guid: 8611fa964513f7f4a8dc55f4bd0fca73,
         type: 3}
@@ -2972,6 +2972,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Tiles.Array.data[199].second.m_TileObjectToInstantiateIndex
       value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 5968751925207191273, guid: 8611fa964513f7f4a8dc55f4bd0fca73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8360661440092005120, guid: 8611fa964513f7f4a8dc55f4bd0fca73,
         type: 3}

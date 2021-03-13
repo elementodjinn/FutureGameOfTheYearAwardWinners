@@ -134,6 +134,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 509550070, guid: 17a835e874debf746ab093fe3153cc87, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 509550071, guid: 17a835e874debf746ab093fe3153cc87, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 509550073, guid: 17a835e874debf746ab093fe3153cc87, type: 3}
       propertyPath: viewIdField
       value: 1
@@ -145,6 +153,11 @@ PrefabInstance:
     - target: {fileID: 6381657966467797940, guid: 17a835e874debf746ab093fe3153cc87,
         type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7815659881957154644, guid: 17a835e874debf746ab093fe3153cc87,
+        type: 3}
+      propertyPath: near clip plane
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8725834717504599664, guid: 17a835e874debf746ab093fe3153cc87,
@@ -349,12 +362,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1878106004}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e31a43a0ede29c4d8ede965b9902f67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 1016483657}
+  floor: {fileID: 0}
+  walls: {fileID: 0}
   roomExits:
   - {fileID: 7347361034275596014, guid: 1e2fe802dc8401647b2e70dfa4086d8d, type: 3}
   - {fileID: 3153667152338748066, guid: d2990fe1b789d1d48b50129b8ffa741e, type: 3}
@@ -378,7 +393,7 @@ PrefabInstance:
     - target: {fileID: 6731017557262834024, guid: 787c8cf61f4a319498ac21eae61c199d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6731017557262834025, guid: 787c8cf61f4a319498ac21eae61c199d,
         type: 3}
@@ -403,7 +418,7 @@ PrefabInstance:
     - target: {fileID: 6731017557262834031, guid: 787c8cf61f4a319498ac21eae61c199d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.54720056
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6731017557262834031, guid: 787c8cf61f4a319498ac21eae61c199d,
         type: 3}
