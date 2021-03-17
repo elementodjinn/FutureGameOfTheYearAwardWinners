@@ -237,5 +237,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5b3d0530bb0a444880df13b9d2cc6c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: playerDamage1
+    clip: {fileID: 8300000, guid: 6d7629c370f6dc54eb06cfcd4ef0f70e, type: 3}
+    group: {fileID: 0}
+    volume: 1
+    pitch: 0.5
+    source: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+  - name: playerDamage2
+    clip: {fileID: 8300000, guid: 6550c9266d32e124fae944fd096c5a1f, type: 3}
+    group: {fileID: 0}
+    volume: 1
+    pitch: 0.5
+    source: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+  - name: antDeath
+    clip: {fileID: 8300000, guid: 01f2f9686de7cea46b5d8b6bbc94ec63, type: 3}
+    group: {fileID: 0}
+    volume: 1
+    pitch: 0.5
+    source: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+  - name: powerMove
+    clip: {fileID: 8300000, guid: ddf0aefa61c268541b81cea5b9c72027, type: 3}
+    group: {fileID: 0}
+    volume: 1
+    pitch: 0.5
+    source: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+  - name: powerPoison
+    clip: {fileID: 8300000, guid: 5ec70624fb09a5643891bfc29765bace, type: 3}
+    group: {fileID: 0}
+    volume: 1
+    pitch: 0.5
+    source: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
   sfx: {fileID: 8539626340379665259}
