@@ -30,7 +30,7 @@ public class TongueControl : MonoBehaviour
 
     //PowerUps
     public bool poison = false;
-    public int poisonInterval = 40;
+    public int poisonInterval = 100;
     public int poisionDMG = 1;
 
 

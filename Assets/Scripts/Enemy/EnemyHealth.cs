@@ -33,7 +33,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if(takingDOT)
         {
-            if(DOTtimer < 0)
+            if(DOTtimer > 0)
             {
                 DOTtimer--;
             }

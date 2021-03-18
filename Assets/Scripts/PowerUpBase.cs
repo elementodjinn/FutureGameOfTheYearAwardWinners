@@ -19,6 +19,7 @@ public abstract class PowerUpBase : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.tag);
         if (collision.tag != "Player") return; // terminate immediately if it isnot a player
         PowerUpEffect(collision.gameObject);
         Destroy(gameObject);

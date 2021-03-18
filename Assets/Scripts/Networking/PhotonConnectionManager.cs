@@ -10,6 +10,7 @@ public class PhotonConnectionManager : MonoBehaviourPunCallbacks, IInRoomCallbac
     #region variables
     private string playerName;
     public InputField playerNameInput;
+    public InputField roomNameInput;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -29,26 +30,28 @@ public class PhotonConnectionManager : MonoBehaviourPunCallbacks, IInRoomCallbac
 
     #region PUN callbacks
 
-    private void OnConnectedToServer()
-    {
-        Debug.Log("Connected To server");
-        PhotonNetwork.GameVersion = "0.1";
-        PhotonNetwork.JoinRandomRoom();
-    }
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected To Master");
         PhotonNetwork.GameVersion = "0.0";
-        PhotonNetwork.JoinRandomRoom();
+        if(roomNameInput.text == "")
+        {
+            roomNameInput.text = Time.time.ToString();
+        }
+        PhotonNetwork.JoinOrCreateRoom(roomNameInput.text, new RoomOptions { MaxPlayers = 2 },TypedLobby.Default);
     }
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         PhotonNetwork.CreateRoom(null, new RoomOptions{MaxPlayers = 2});
     }
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("Room you tried to connect is closed");
+    }
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined a room");
-        PhotonNetwork.LoadLevel("Sin Scene");
+        PhotonNetwork.LoadLevel("lobby");
     }
     #endregion
 }
