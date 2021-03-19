@@ -128,6 +128,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 137435057, guid: 70f4aed671feb144fb39eccb9c743fec, type: 3}
+      propertyPath: attackRange
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1077768034, guid: 70f4aed671feb144fb39eccb9c743fec, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -309,7 +313,7 @@ PrefabInstance:
     - target: {fileID: 8725834717504599667, guid: 17a835e874debf746ab093fe3153cc87,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.5
+      value: -4.3
       objectReference: {fileID: 0}
     - target: {fileID: 8725834717504599667, guid: 17a835e874debf746ab093fe3153cc87,
         type: 3}
