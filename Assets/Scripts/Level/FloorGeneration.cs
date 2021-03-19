@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using System.IO;
 
 public class FloorGeneration : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class FloorGeneration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!PhotonNetwork.IsMasterClient) return;
         floorLayout = floorSet(length, height);
         for(int i = 0; i < length; i++)
         {
@@ -25,7 +28,8 @@ public class FloorGeneration : MonoBehaviour
                 Vector2 spawnPosition = new Vector2(roomLength * i, roomHeight * j);
                 List<GameObject> viableRooms = allViableRooms(rooms, floorLayout[i, j]);
                 int room = Random.Range(0, viableRooms.Count-1);
-                Object.Instantiate(viableRooms[room], spawnPosition, Quaternion.identity, grid.transform);
+//                Object.Instantiate(viableRooms[room], spawnPosition, Quaternion.identity, grid.transform);
+                PhotonNetwork.Instantiate(Path.Combine("Rooms", viableRooms[room].name), spawnPosition, Quaternion.identity, 0);
             }
         }
     }
