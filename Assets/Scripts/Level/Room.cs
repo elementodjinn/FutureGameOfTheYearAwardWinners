@@ -22,8 +22,8 @@ public class Room : MonoBehaviour
     public Light roomLight;
     private bool isOn = false;
     private bool spawnedEnemies = false;
-    private List<GameObject> playersInside;
-    private List<GameObject> aliveEnemies;
+    private List<GameObject> playersInside = new List<GameObject>();
+    private List<GameObject> aliveEnemies = new List<GameObject>();
     public RoomType roomType { get; set; }
     // Start is called before the first frame update
     void Start()
@@ -50,8 +50,9 @@ public class Room : MonoBehaviour
         {
             roomLight.enabled = true;
             isOn = true;
+            Debug.Log(collision.gameObject);
             playersInside.Add(collision.gameObject);
-            if(!spawnedEnemies && PhotonNetwork.IsMasterClient)
+            if(!spawnedEnemies && PhotonNetwork.IsMasterClient && roomType != RoomType.SpawnRoom)
             {
                 foreach(Transform t in enemySpawnPoints)
                 {
@@ -63,7 +64,8 @@ public class Room : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" && playersInside.Count == 1)
+        Debug.Log(playersInside.Count);
+        if (collision.gameObject.tag == "Player" && playersInside.Count <= 1)
         {
             roomLight.enabled = false;
             isOn = false;

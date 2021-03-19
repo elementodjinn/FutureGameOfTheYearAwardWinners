@@ -826,6 +826,7 @@ GameObject:
   - component: {fileID: 755569230078776114}
   - component: {fileID: 8360661440092005120}
   - component: {fileID: 8701090716173458603}
+  - component: {fileID: 2409073945574126750}
   m_Layer: 12
   m_Name: Room
   m_TagString: Untagged
@@ -866,7 +867,9 @@ MonoBehaviour:
   eastExit: 0
   westExit: 0
   cameraPosition: {fileID: 0}
-  light: {fileID: 5968751925207191273}
+  enemySpawnPoints: []
+  enemy: {fileID: 8180350669792033068, guid: 5a7330d3040747a43be69009cf13fce4, type: 3}
+  roomLight: {fileID: 5968751925207191273}
 --- !u!61 &8701090716173458603
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -893,6 +896,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 14, y: 14}
   m_EdgeRadius: 0
+--- !u!114 &2409073945574126750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755569230078776115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &755569230276312265
 GameObject:
   m_ObjectHideFlags: 0
