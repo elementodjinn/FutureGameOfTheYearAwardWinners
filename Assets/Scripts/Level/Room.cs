@@ -51,11 +51,11 @@ public class Room : MonoBehaviour
             roomLight.enabled = true;
             isOn = true;
             playersInside.Add(collision.gameObject);
-            if(!spawnedEnemies && PhotonNetwork.IsMasterClient && roomType != RoomType.SpawnRoom)
+            /*if(!spawnedEnemies && PhotonNetwork.IsMasterClient && roomType == RoomType.BossRoom)
             {
                 PhotonView pv = PhotonView.Get(this);
-                pv.RPC("SpawnEnemies", RpcTarget.MasterClient);
-            }
+                pv.RPC("SpawnEnd", RpcTarget.MasterClient);
+            }*/
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -76,6 +76,15 @@ public class Room : MonoBehaviour
             Debug.Log(t);
             GameObject aliveEnemy = PhotonNetwork.Instantiate(Path.Combine("Prefab","antGrunt"), t.position, t.rotation);
             aliveEnemies.Add(aliveEnemy);
+        }
+    }
+    [PunRPC]
+    void SpawnEnd()
+    {
+        foreach (Transform t in enemySpawnPoints)
+        {
+            Debug.Log(t);
+            PhotonNetwork.Instantiate(Path.Combine("Prefab", "LevelEnd"), t.position, t.rotation);
         }
     }
 }

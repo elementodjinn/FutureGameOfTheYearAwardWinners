@@ -10,6 +10,7 @@ public class FloorGeneration : MonoBehaviour
     public GameObject[] rooms;
     public int length = 3;
     public int height = 3;
+    public GameObject endLevel;
 
     //These are the dimensions of the rooms, here temporarily before I add a room sc
     private int roomLength = 16;
@@ -34,6 +35,11 @@ public class FloorGeneration : MonoBehaviour
                 if (i==0 && j==0)
                 {
                     r.roomType = RoomType.SpawnRoom;
+                }
+                else if(i==length - 1 && j == height -1)
+                {
+                    r.roomType = RoomType.BossRoom;
+                    endLevel.transform.position = r.transform.position;
                 }
                 else
                 {
