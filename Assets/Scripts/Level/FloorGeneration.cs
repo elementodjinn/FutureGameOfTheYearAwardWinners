@@ -10,6 +10,7 @@ public class FloorGeneration : MonoBehaviour
     public GameObject[] rooms;
     public int length = 3;
     public int height = 3;
+    public GameObject endLevel;
 
     //These are the dimensions of the rooms, here temporarily before I add a room sc
     private int roomLength = 16;
@@ -29,7 +30,28 @@ public class FloorGeneration : MonoBehaviour
                 List<GameObject> viableRooms = allViableRooms(rooms, floorLayout[i, j]);
                 int room = Random.Range(0, viableRooms.Count-1);
 //                Object.Instantiate(viableRooms[room], spawnPosition, Quaternion.identity, grid.transform);
+<<<<<<< HEAD
                 PhotonNetwork.Instantiate(Path.Combine("Prefab","Rooms", viableRooms[room].name), spawnPosition, Quaternion.identity, 0);
+=======
+                GameObject spawnedRoom = PhotonNetwork.Instantiate(Path.Combine("Prefab","Rooms", viableRooms[room].name), spawnPosition, Quaternion.identity, 0);
+                Room r = spawnedRoom.GetComponent<Room>();
+                if (i==0 && j==0)
+                {
+                    r.roomType = RoomType.SpawnRoom;
+                }
+                else if(i==length - 1 && j == height -1)
+                {
+                    r.roomType = RoomType.BossRoom;
+                    endLevel.transform.position = r.transform.position;
+                }
+                else
+                {
+                    r.roomType = RoomType.EnemyRoom;
+                    Transform[] t = new Transform[1];
+                    t[0] = r.transform;
+                    r.enemySpawnPoints = t;
+                }
+>>>>>>> 23eca104bfab8315152698baf8840534df049eba
             }
         }
     }
