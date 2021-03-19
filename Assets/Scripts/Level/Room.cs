@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
+using System.IO;
 
 public class Room : MonoBehaviour
 {
@@ -50,26 +50,32 @@ public class Room : MonoBehaviour
         {
             roomLight.enabled = true;
             isOn = true;
-            Debug.Log(collision.gameObject);
             playersInside.Add(collision.gameObject);
             if(!spawnedEnemies && PhotonNetwork.IsMasterClient && roomType != RoomType.SpawnRoom)
             {
-                foreach(Transform t in enemySpawnPoints)
-                {
-                    GameObject aliveEnemy = Instantiate(enemy, t.position, t.rotation);
-                    aliveEnemies.Add(aliveEnemy);
-                }
+                PhotonView pv = PhotonView.Get(this);
+                pv.RPC("SpawnEnemies", RpcTarget.MasterClient);
             }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log(playersInside.Count);
         if (collision.gameObject.tag == "Player" && playersInside.Count <= 1)
         {
             roomLight.enabled = false;
             isOn = false;
         }
         playersInside.Remove(collision.gameObject);
+    }
+
+    [PunRPC]
+    void SpawnEnemies()
+    {
+        foreach (Transform t in enemySpawnPoints)
+        {
+            Debug.Log(t);
+            GameObject aliveEnemy = PhotonNetwork.Instantiate(Path.Combine("Prefab","antGrunt"), t.position, t.rotation);
+            aliveEnemies.Add(aliveEnemy);
+        }
     }
 }

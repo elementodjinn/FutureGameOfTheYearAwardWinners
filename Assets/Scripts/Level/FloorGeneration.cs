@@ -40,6 +40,7 @@ public class FloorGeneration : MonoBehaviour
                     r.roomType = RoomType.EnemyRoom;
                     Transform[] t = new Transform[1];
                     t[0] = r.transform;
+                    r.enemySpawnPoints = t;
                 }
             }
         }
