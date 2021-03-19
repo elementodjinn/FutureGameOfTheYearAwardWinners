@@ -19,7 +19,7 @@ public class FloorGeneration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!PhotonNetwork.IsMasterClient) return;
+        if (!PhotonNetwork.IsMasterClient ) return;
         floorLayout = floorSet(length, height);
         for(int i = 0; i < length; i++)
         {
@@ -29,18 +29,7 @@ public class FloorGeneration : MonoBehaviour
                 List<GameObject> viableRooms = allViableRooms(rooms, floorLayout[i, j]);
                 int room = Random.Range(0, viableRooms.Count-1);
 //                Object.Instantiate(viableRooms[room], spawnPosition, Quaternion.identity, grid.transform);
-                GameObject spawnedRoom = PhotonNetwork.Instantiate(Path.Combine("Prefab","Rooms", viableRooms[room].name), spawnPosition, Quaternion.identity, 0);
-                Room r = spawnedRoom.GetComponent<Room>();
-                if (i==0 && j==0)
-                {
-                    r.roomType = RoomType.SpawnRoom;
-                }
-                else
-                {
-                    r.roomType = RoomType.EnemyRoom;
-                    Transform[] t = new Transform[1];
-                    t[0] = r.transform;
-                }
+                PhotonNetwork.Instantiate(Path.Combine("Prefab","Rooms", viableRooms[room].name), spawnPosition, Quaternion.identity, 0);
             }
         }
     }

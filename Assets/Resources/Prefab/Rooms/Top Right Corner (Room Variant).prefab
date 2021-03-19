@@ -1294,7 +1294,7 @@ PrefabInstance:
     - target: {fileID: 755569230078776115, guid: 8611fa964513f7f4a8dc55f4bd0fca73,
         type: 3}
       propertyPath: m_Name
-      value: Top Right Corner
+      value: Top Right Corner (Room Variant)
       objectReference: {fileID: 0}
     - target: {fileID: 755569230276312270, guid: 8611fa964513f7f4a8dc55f4bd0fca73,
         type: 3}
