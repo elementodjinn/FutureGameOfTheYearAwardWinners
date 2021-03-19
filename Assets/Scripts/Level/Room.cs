@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class Room : MonoBehaviour
 {
@@ -15,8 +17,14 @@ public class Room : MonoBehaviour
     public int height { get; set; } = 16;
 
     public Transform cameraPosition;
-    public Light light;
+    public Transform[] enemySpawnPoints;
+    public GameObject enemy;
+    public Light roomLight;
     private bool isOn = false;
+    private bool spawnedEnemies = false;
+    private List<GameObject> playersInside;
+    private List<GameObject> aliveEnemies;
+    public RoomType roomType { get; set; }
     // Start is called before the first frame update
     void Start()
     {
@@ -30,26 +38,36 @@ public class Room : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(!isOn && collision.gameObject.GetComponent<PlayerMovement>() != null)
+        if(!isOn && collision.gameObject.tag == "Player")
         {
-            light.enabled = true;
+            roomLight.enabled = true;
             isOn = true;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.GetComponent<PlayerMovement>() != null)
+        if(!isOn && collision.gameObject.tag == "Player")
         {
-            light.enabled = true;
+            roomLight.enabled = true;
             isOn = true;
+            playersInside.Add(collision.gameObject);
+            if(!spawnedEnemies && PhotonNetwork.IsMasterClient)
+            {
+                foreach(Transform t in enemySpawnPoints)
+                {
+                    GameObject aliveEnemy = Instantiate(enemy, t.position, t.rotation);
+                    aliveEnemies.Add(aliveEnemy);
+                }
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerMovement>() != null)
+        if (collision.gameObject.tag == "Player" && playersInside.Count == 1)
         {
-            light.enabled = false;
+            roomLight.enabled = false;
             isOn = false;
         }
+        playersInside.Remove(collision.gameObject);
     }
 }
