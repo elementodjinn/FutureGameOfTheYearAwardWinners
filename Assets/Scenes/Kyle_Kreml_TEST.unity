@@ -225,6 +225,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1053993321736868457, guid: 5a7330d3040747a43be69009cf13fce4,
+        type: 3}
+      propertyPath: viewIdField
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8180350669792033066, guid: 5a7330d3040747a43be69009cf13fce4,
         type: 3}
       propertyPath: m_RootOrder

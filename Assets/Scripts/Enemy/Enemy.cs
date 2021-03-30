@@ -13,9 +13,9 @@ public class Enemy : NPC
     public Transform Target { get => target; set => target = value; }
     public PlayerHealth TargetHealth { get => targetHealth; set => targetHealth = value; }
 
-    public Vector3 origin; // Where the object was instantiated
+    public Vector3 origin; // Where the object was instantiated and where it will wander around
     public float wanderRange; // how far the enemy can wander from its origin
-    private Vector3 randomSpot;
+    private Vector3 randomSpot; // Determines where the Enemy will wander to within it's allowed wanderRange.
     private float waitTime;
     private float lastAttack = 0f;
 
@@ -61,8 +61,9 @@ public class Enemy : NPC
 
     protected virtual void AttackBehavior() //allows for override in different enemy behaviors
     {
-        if (Vector2.Distance(transform.position, target.position) > attackRange && Time.time - lastAttack > attackCooldown)
+        if (Vector2.Distance(transform.position, target.position) > attackRange && Time.time - lastAttack > attackCooldown) 
         {
+            //moves in to attack if attack is off cooldown and out of range
             direction = (target.transform.position - transform.position).normalized;
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
@@ -78,16 +79,16 @@ public class Enemy : NPC
         }
     }
 
-    private void Wander()
+    private void Wander() //Enemies wander when they do not have a target, and they wander around their spawn location in a radius determined by wanderRange
     {
         direction = (randomSpot - transform.position).normalized;
         transform.position = Vector2.MoveTowards(transform.position, randomSpot, speed * Time.deltaTime);
 
-        if (Vector2.Distance(transform.position, randomSpot) < 0.2f)
+        if (Vector2.Distance(transform.position, randomSpot) < 0.2f) //checks to see if it's near enough to the destination to choose a new destination or wait.
         {
             if (waitTime <= 0)
             {
-                randomSpot = origin + new Vector3(Random.Range(-wanderRange, wanderRange), Random.Range(-wanderRange, wanderRange), 0);
+                randomSpot = origin + new Vector3(Random.Range(-wanderRange, wanderRange), Random.Range(-wanderRange, wanderRange), 0); //chooses a new spot to wander to
                 waitTime = movementRestInterval;
                 direction = Vector2.zero; //reset movement. stop moving
             }

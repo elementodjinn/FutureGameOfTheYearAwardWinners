@@ -8,11 +8,6 @@ public class AntWorkerBehavior : Enemy
     {
         base.Start();
     }
-    /*
-    protected override void AttackBehavior()
-    {
-        direction = (Target.transform.position - transform.position).normalized;
-        transform.position = Vector2.MoveTowards(transform.position, Target.position, speed * Time.deltaTime);
-    }
-    */
+
+    //Add an AttackBehaviour function if you want to override the base attack behaviour of the Enemy class
 }

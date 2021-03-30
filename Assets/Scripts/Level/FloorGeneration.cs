@@ -56,12 +56,6 @@ public class FloorGeneration : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     //This makes a list of all the rooms you put in the room set that have the correct exits.
     List<GameObject> allViableRooms(GameObject[] roomSet, RoomModel roomToMatch)
     {

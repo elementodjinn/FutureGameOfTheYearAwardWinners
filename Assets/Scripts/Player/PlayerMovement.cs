@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour, IPunObservable
 {
-    // Written by Kyle Kreml
     #region Variables
 
     //This is just a general speed multiplier for the player, haven't tried anything else yet.
